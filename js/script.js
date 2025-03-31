@@ -2,13 +2,13 @@ document.getElementById("addTaskBtn").addEventListener("click", addTask);
 document.getElementById("taskList").addEventListener("click", handleListClick);
 document.getElementById("searchInput").addEventListener("input", searchTasks);
 
-let tasks = []; // Array to keep track of tasks
-
+let tasks = [];
+// Add task
 function addTask() {
   const taskInput = document.getElementById("taskInput");
   const taskText = taskInput.value.trim();
   if (taskText) {
-    tasks.push(taskText); // Add task to the array
+    tasks.push(taskText);
     updateTaskList();
     taskInput.value = "";
   }
@@ -16,7 +16,7 @@ function addTask() {
 
 function updateTaskList() {
   const taskList = document.getElementById("taskList");
-  taskList.innerHTML = ""; // Clear existing list
+  taskList.innerHTML = "";
   tasks.forEach((task, index) => {
     const li = document.createElement("li");
     li.innerHTML = `${index + 1}. <span class="task-text">${task}</span>
@@ -25,28 +25,28 @@ function updateTaskList() {
     taskList.appendChild(li);
   });
 }
+//   delete task
 function handleListClick(e) {
   const index = Array.from(document.querySelectorAll("#taskList li")).indexOf(
     e.target.parentElement
   );
   if (e.target.classList.contains("delete")) {
-    tasks.splice(index, 1); // Remove task from the array
+    tasks.splice(index, 1);
     updateTaskList();
   } else if (e.target.classList.contains("edit")) {
     const taskTextElement = e.target.previousElementSibling;
-    const currentTask = taskTextElement.textContent; // Get the current task text
+    const currentTask = taskTextElement.textContent;
     taskTextElement.innerHTML = `<input type="text" class="edit-input" value="${currentTask}" />`;
+    // Update task
 
-    // Focus on the input field
     const inputField = taskTextElement.querySelector(".edit-input");
     inputField.focus();
     inputField.addEventListener("blur", () => {
       const newTask = inputField.value.trim();
       if (newTask) {
-        tasks[index] = newTask; // Update task in the array
+        tasks[index] = newTask;
         updateTaskList();
       } else {
-        // If input is empty, revert to original task
         taskTextElement.innerHTML = currentTask;
       }
     });
@@ -61,12 +61,10 @@ function searchTasks() {
   const taskList = document.getElementById("taskList");
   let found = false;
 
-  // Clear previous message
   if (noTaskMessage) {
     noTaskMessage.remove();
   }
 
-  // Clear previous highlights
   taskList
     .querySelectorAll("li")
     .forEach((li) => (li.style.backgroundColor = ""));
@@ -74,8 +72,7 @@ function searchTasks() {
   if (searchInput) {
     tasks.forEach((task, index) => {
       if (task.toLowerCase() === searchInput) {
-        // Highlight the found task
-        taskList.children[index].style.backgroundColor = "#d3ffd3"; // Light green background
+        taskList.children[index].style.backgroundColor = "#d3ffd3";
         const message = document.createElement("div");
         message.style.color = "green";
         message.textContent = `Task found: "${task}" at position ${index + 1}.`;
