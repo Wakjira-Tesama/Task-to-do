@@ -25,3 +25,30 @@ function updateTaskList() {
     taskList.appendChild(li);
   });
 }
+function handleListClick(e) {
+  const index = Array.from(document.querySelectorAll("#taskList li")).indexOf(
+    e.target.parentElement
+  );
+  if (e.target.classList.contains("delete")) {
+    tasks.splice(index, 1); // Remove task from the array
+    updateTaskList();
+  } else if (e.target.classList.contains("edit")) {
+    const taskTextElement = e.target.previousElementSibling;
+    const currentTask = taskTextElement.textContent; // Get the current task text
+    taskTextElement.innerHTML = `<input type="text" class="edit-input" value="${currentTask}" />`;
+
+    // Focus on the input field
+    const inputField = taskTextElement.querySelector(".edit-input");
+    inputField.focus();
+    inputField.addEventListener("blur", () => {
+      const newTask = inputField.value.trim();
+      if (newTask) {
+        tasks[index] = newTask; // Update task in the array
+        updateTaskList();
+      } else {
+        // If input is empty, revert to original task
+        taskTextElement.innerHTML = currentTask;
+      }
+    });
+  }
+}
