@@ -65,7 +65,7 @@ To run the application locally, clone the repository and open index.html in your
 bash
 
 Copy
-git clone https://github.com/username/todo-list.git
+git clone (https://github.com/Wakjira-Tesama/Task-to-do.git)
 cd todo-list
 open index.html
 
