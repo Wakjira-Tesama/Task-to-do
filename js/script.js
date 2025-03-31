@@ -52,3 +52,44 @@ function handleListClick(e) {
     });
   }
 }
+function searchTasks() {
+  const searchInput = document
+    .getElementById("searchInput")
+    .value.trim()
+    .toLowerCase();
+  const noTaskMessage = document.getElementById("noTaskMessage");
+  const taskList = document.getElementById("taskList");
+  let found = false;
+
+  // Clear previous message
+  if (noTaskMessage) {
+    noTaskMessage.remove();
+  }
+
+  // Clear previous highlights
+  taskList
+    .querySelectorAll("li")
+    .forEach((li) => (li.style.backgroundColor = ""));
+
+  if (searchInput) {
+    tasks.forEach((task, index) => {
+      if (task.toLowerCase() === searchInput) {
+        // Highlight the found task
+        taskList.children[index].style.backgroundColor = "#d3ffd3"; // Light green background
+        const message = document.createElement("div");
+        message.style.color = "green";
+        message.textContent = `Task found: "${task}" at position ${index + 1}.`;
+        document.querySelector(".container").appendChild(message);
+        found = true;
+      }
+    });
+  }
+
+  if (!found && searchInput) {
+    const message = document.createElement("div");
+    message.id = "noTaskMessage";
+    message.style.color = "red";
+    message.textContent = "There is no task called this.";
+    document.querySelector(".container").appendChild(message);
+  }
+}
