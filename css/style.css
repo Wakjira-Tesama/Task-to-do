@@ -65,3 +65,15 @@ li {
   margin-left: 70%;
   font-size: 15px;
 }
+
+#taskList button.delete {
+  font-size: 15px;
+  color: red;
+}
+#taskList button.edit:hover {
+  background-color: rgb(156, 243, 156);
+}
+#taskList button.delete:hover {
+  background-color: rgb(238, 134, 134);
+  color: black;
+}
