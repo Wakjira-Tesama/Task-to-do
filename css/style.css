@@ -28,3 +28,40 @@ input[type="text"] {
   background-color: rgba(255, 255, 255, 0.926);
   border: none;
 }
+#searchInput {
+  margin-left: 80px;
+}
+
+#taskInput {
+  margin-bottom: 20px;
+}
+button {
+  padding: 10px;
+  border-radius: 20px;
+
+  border: none;
+  cursor: pointer;
+}
+#addTaskBtn {
+  border-radius: 20px;
+  background-color: rgb(170, 191, 170);
+  border: none;
+}
+#addTaskBtn:hover {
+  background-color: #56823f;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+#taskList button.edit {
+  margin-left: 70%;
+  font-size: 15px;
+}
